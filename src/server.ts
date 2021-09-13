@@ -49,12 +49,12 @@ class Server {
         });
       }
 
-      await createConnection(connectionOptions);
+      let connection = await createConnection(connectionOptions);
 
-      // console.log(
-      //   "🚀 ~ file: server.ts ~ line 33 ~ Server ~ routes ~ connection",
-      //   connection
-      // );
+      console.log(
+        "🚀 ~ file: server.ts ~ line 33 ~ Server ~ routes ~ connection",
+        connection
+      );
     } catch (error) {
       console.log(error);
     }
