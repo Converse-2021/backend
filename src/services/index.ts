@@ -34,8 +34,28 @@ export class EventsService {
   }
 
   public fetchAll = async (eventName: string) => {
-    const users = await this.imageITRepo.find();
-    return users;
+    switch (eventName.toLowerCase()) {
+      case "imageit":
+        return await this.imageITRepo.find();
+
+      case "codedecode":
+        return await this.codeDecodeRepo.find();
+
+      case "itquiz":
+        return await this.itQuizRepo.find();
+
+      case "logohunt":
+        return await this.logohuntRepo.find();
+
+      case "pyit":
+        return await this.pyitRepo.find();
+
+      case "wysiwyg":
+        return await this.wysiwygRepo.find();
+
+      default:
+        throw Error("Entity not found");
+    }
   };
 
   public create = async (
