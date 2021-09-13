@@ -6,7 +6,7 @@ import {
   LogoHunt,
   PyIT,
   WYSIWYG
-} from "../database/entities/events.entities";
+} from "../database/entities/events.entity";
 
 @EntityRepository(ImageIT)
 export class ImageITRepo extends Repository<ImageIT> {}

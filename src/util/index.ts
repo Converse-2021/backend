@@ -5,7 +5,7 @@ import {
   LogoHunt,
   PyIT,
   WYSIWYG
-} from "../database/entities/events.entities";
+} from "../database/entities/events.entity";
 
 export function fetchEntityFromEvent(event: string) {
   switch (event.toLowerCase()) {
