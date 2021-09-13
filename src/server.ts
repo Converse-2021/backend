@@ -31,14 +31,20 @@ class Server {
         // username: "converse",
         // password: "converse",
         // database: "converse",
+
         entities: [__dirname + "/../**/*.entity.{js,ts}"],
         synchronize: process.env.DATABASE_URL ? false : true,
         name: "converse"
       };
 
       if (process.env.DATABASE_URL) {
-        Object.assign(connectionOptions, { url: process.env.DATABASE_URL });
-        console.log("CONNECTED SUCCESSFULLY");
+        Object.assign(connectionOptions, {
+          url: process.env.DATABASE_URL,
+          extra: {
+            ssl: true
+          }
+        });
+        console.log("CONNECTED SUCCESSFULLY: " + process.env.DATABASE_URL);
       } else {
         Object.assign(connectionOptions, {
           host: "localhost",
