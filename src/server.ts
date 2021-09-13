@@ -1,11 +1,10 @@
 import express, { Request, Response } from "express";
 import { EventController } from "./controllers";
-import { Connection, ConnectionOptions, createConnection } from "typeorm";
+import { ConnectionOptions, createConnection } from "typeorm";
 
 class Server {
   private app: express.Application;
   private eventController: EventController;
-  public static connection: Connection;
 
   constructor() {
     this.app = express();
@@ -17,10 +16,10 @@ class Server {
   }
 
   public configuration() {
-    this.app.set("port", process.env.PORT || 3000);
+    this.app.set("port", process.env.PORT || 3001);
   }
 
-  public routes = async () => {
+  public async routes() {
     try {
       let connectionOptions: ConnectionOptions;
       connectionOptions = {
@@ -44,16 +43,16 @@ class Server {
           port: 5433,
           username: "converse",
           password: "converse",
-          database: "converse",
-          name: "converse"
+          database: "converse"
         });
       }
 
-      Server.connection = await createConnection(connectionOptions);
-      console.log(
-        "🚀 ~ file: server.ts ~ line 33 ~ Server ~ routes ~ connection",
-        Server.connection
-      );
+      await createConnection(connectionOptions);
+
+      // console.log(
+      //   "🚀 ~ file: server.ts ~ line 33 ~ Server ~ routes ~ connection",
+      //   connection
+      // );
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +62,7 @@ class Server {
     this.app.get("/", (req: Request, res: Response) => {
       res.send("Hello World");
     });
-  };
+  }
 
   public start() {
     const port = this.app.get("port");
