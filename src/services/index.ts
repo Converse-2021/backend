@@ -1,0 +1,70 @@
+import { Connection, getConnection } from "typeorm";
+import {
+  ImageITRepo,
+  CodeDecodeRepo,
+  ITQuizRepo,
+  LogoHuntRepo,
+  PyITRepo,
+  WYSIWYGRepo
+} from "../repository/EventRepository";
+import {
+  Event,
+  EventWithMultipleParticipants
+} from "../database/entities/event.abstract";
+
+export class EventsService {
+  private imageITRepo: ImageITRepo;
+  private codeDecodeRepo: CodeDecodeRepo;
+  private itQuizRepo: ITQuizRepo;
+  private wysiwygRepo: WYSIWYGRepo;
+  private pyitRepo: PyITRepo;
+  private logohuntRepo: LogoHuntRepo;
+
+  constructor() {
+    this.imageITRepo =
+      getConnection("converse").getCustomRepository(ImageITRepo);
+    this.codeDecodeRepo =
+      getConnection("converse").getCustomRepository(CodeDecodeRepo);
+    this.itQuizRepo = getConnection("converse").getCustomRepository(ITQuizRepo);
+    this.wysiwygRepo =
+      getConnection("converse").getCustomRepository(WYSIWYGRepo);
+    this.pyitRepo = getConnection("converse").getCustomRepository(PyITRepo);
+    this.logohuntRepo =
+      getConnection("converse").getCustomRepository(LogoHuntRepo);
+  }
+
+  public fetchAll = async (eventName: string) => {
+    const users = await this.imageITRepo.find();
+    return users;
+  };
+
+  public create = async (
+    eventName: string,
+    event: Event | EventWithMultipleParticipants
+  ) => {
+    // this.connection.createQueryBuilder().insert().into(this.imageITRepo.target);
+
+    switch (eventName.toLowerCase()) {
+      case "imageit":
+        return await this.imageITRepo.save(event);
+
+      case "codedecode":
+        return await this.codeDecodeRepo.save(event);
+
+      case "itquiz":
+        return await this.itQuizRepo.save(event);
+
+      case "logohunt":
+        return await this.logohuntRepo.save(event);
+
+      case "pyit":
+        return await this.pyitRepo.save(event);
+
+      case "wysiwyg":
+        return await this.wysiwygRepo.save(event);
+
+      default:
+        throw Error("Entity not found");
+    }
+  };
+}

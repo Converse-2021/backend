@@ -1,0 +1,21 @@
+{
+  "ts-node": {
+    "compilerOptions": {
+      "rootDirs": ["./src"],
+      "outDir": "./build"
+    }
+  },
+
+  "compilerOptions": {
+    "target": "es5" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */ /* Specify a set of entries that re-map imports to additional lookup locations. */,
+    "rootDirs": ["./src"],
+    "outDir": "./build" /* Specify an output folder for all emitted files. */,
+    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */ /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "strict": true,
+    "strictPropertyInitialization": false /* Skip type checking .d.ts files that are included with TypeScript. */,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+  }
+}
