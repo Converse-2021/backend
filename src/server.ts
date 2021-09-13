@@ -22,6 +22,8 @@ class Server {
   public async routes() {
     try {
       let connectionOptions: ConnectionOptions;
+      console.log([__dirname + "/**/*.entities.{js,ts}"]);
+
       connectionOptions = {
         type: "postgres",
         // host: "localhost",
@@ -29,7 +31,7 @@ class Server {
         // username: "converse",
         // password: "converse",
         // database: "converse",
-        entities: ["build/src/database/entities/*.entities.js"],
+        entities: [__dirname + "/**/*.entities.{js,ts}"],
         synchronize: process.env.DATABASE_URL ? false : true
         // name: "converse"
       };
