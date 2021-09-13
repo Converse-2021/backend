@@ -12,6 +12,8 @@ import {
   EventWithMultipleParticipants
 } from "../database/entities/event.abstract";
 
+import Server from "../server";
+
 export class EventsService {
   private imageITRepo: ImageITRepo;
   private codeDecodeRepo: CodeDecodeRepo;
@@ -21,16 +23,24 @@ export class EventsService {
   private logohuntRepo: LogoHuntRepo;
 
   constructor() {
-    this.imageITRepo =
-      getConnection("converse").getCustomRepository(ImageITRepo);
-    this.codeDecodeRepo =
-      getConnection("converse").getCustomRepository(CodeDecodeRepo);
-    this.itQuizRepo = getConnection("converse").getCustomRepository(ITQuizRepo);
-    this.wysiwygRepo =
-      getConnection("converse").getCustomRepository(WYSIWYGRepo);
-    this.pyitRepo = getConnection("converse").getCustomRepository(PyITRepo);
-    this.logohuntRepo =
-      getConnection("converse").getCustomRepository(LogoHuntRepo);
+    this.imageITRepo = getConnection(
+      Server.connection.name
+    ).getCustomRepository(ImageITRepo);
+    this.codeDecodeRepo = getConnection(
+      Server.connection.name
+    ).getCustomRepository(CodeDecodeRepo);
+    this.itQuizRepo = getConnection(Server.connection.name).getCustomRepository(
+      ITQuizRepo
+    );
+    this.wysiwygRepo = getConnection(
+      Server.connection.name
+    ).getCustomRepository(WYSIWYGRepo);
+    this.pyitRepo = getConnection(Server.connection.name).getCustomRepository(
+      PyITRepo
+    );
+    this.logohuntRepo = getConnection(
+      Server.connection.name
+    ).getCustomRepository(LogoHuntRepo);
   }
 
   public fetchAll = async (eventName: string) => {
