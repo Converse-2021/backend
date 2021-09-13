@@ -42,7 +42,8 @@ class Server {
           url: process.env.DATABASE_URL,
           extra: {
             ssl: true
-          }
+          },
+          ssl: true
         });
         console.log("CONNECTED SUCCESSFULLY: " + process.env.DATABASE_URL);
       } else {
