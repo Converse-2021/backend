@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { EventController } from "./controllers";
-import { createConnection } from "typeorm";
+import { ConnectionOptions, createConnection } from "typeorm";
 
 class Server {
   private app: express.Application;
@@ -21,21 +21,39 @@ class Server {
 
   public async routes() {
     try {
-      const connection = await createConnection({
+      let connectionOptions: ConnectionOptions;
+      connectionOptions = {
         type: "postgres",
-        host: "localhost",
-        port: 5433,
-        username: "converse",
-        password: "converse",
-        database: "converse",
+        // host: "localhost",
+        // port: 5433,
+        // username: "converse",
+        // password: "converse",
+        // database: "converse",
         entities: ["build/src/database/entities/*.entities.js"],
-        synchronize: true,
-        name: "converse"
-      });
-      // console.log(
-      //   "🚀 ~ file: server.ts ~ line 33 ~ Server ~ routes ~ connection",
-      //   connection
-      // );
+        synchronize: process.env.DATABASE_URL ? false : true
+        // name: "converse"
+      };
+
+      if (process.env.DATABASE_URL) {
+        Object.assign(connectionOptions, { url: process.env.DATABASE_URL });
+        console.log("CONNECTED SUCCESSFULLY");
+      } else {
+        Object.assign(connectionOptions, {
+          host: "localhost",
+          port: 5433,
+          username: "converse",
+          password: "converse",
+          database: "converse",
+          name: "converse"
+        });
+      }
+
+      const connection = createConnection(connectionOptions);
+
+      console.log(
+        "🚀 ~ file: server.ts ~ line 33 ~ Server ~ routes ~ connection",
+        connection
+      );
     } catch (error) {
       console.log(error);
     }
