@@ -40,10 +40,12 @@ class Server {
       if (process.env.DATABASE_URL) {
         Object.assign(connectionOptions, {
           url: process.env.DATABASE_URL,
+          ssl: true,
           extra: {
-            ssl: true
-          },
-          ssl: true
+            ssl: {
+              rejectUnauthorized: false
+            }
+          }
         });
         console.log("CONNECTED SUCCESSFULLY: " + process.env.DATABASE_URL);
       } else {
