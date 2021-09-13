@@ -32,8 +32,8 @@ class Server {
         // password: "converse",
         // database: "converse",
         entities: [__dirname + "/**/*.entities.{js,ts}"],
-        synchronize: process.env.DATABASE_URL ? false : true
-        // name: "converse"
+        synchronize: process.env.DATABASE_URL ? false : true,
+        name: "converse"
       };
 
       if (process.env.DATABASE_URL) {

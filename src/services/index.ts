@@ -23,12 +23,16 @@ export class EventsService {
   private logohuntRepo: LogoHuntRepo;
 
   constructor() {
-    this.imageITRepo = getConnection().getCustomRepository(ImageITRepo);
-    this.codeDecodeRepo = getConnection().getCustomRepository(CodeDecodeRepo);
-    this.itQuizRepo = getConnection().getCustomRepository(ITQuizRepo);
-    this.wysiwygRepo = getConnection().getCustomRepository(WYSIWYGRepo);
-    this.pyitRepo = getConnection().getCustomRepository(PyITRepo);
-    this.logohuntRepo = getConnection().getCustomRepository(LogoHuntRepo);
+    this.imageITRepo =
+      getConnection("converse").getCustomRepository(ImageITRepo);
+    this.codeDecodeRepo =
+      getConnection("converse").getCustomRepository(CodeDecodeRepo);
+    this.itQuizRepo = getConnection("converse").getCustomRepository(ITQuizRepo);
+    this.wysiwygRepo =
+      getConnection("converse").getCustomRepository(WYSIWYGRepo);
+    this.pyitRepo = getConnection("converse").getCustomRepository(PyITRepo);
+    this.logohuntRepo =
+      getConnection("converse").getCustomRepository(LogoHuntRepo);
   }
 
   public fetchAll = async (eventName: string) => {
