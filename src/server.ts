@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { EventController } from "./controllers";
 import { ConnectionOptions, createConnection } from "typeorm";
+import cors from "cors";
 
 class Server {
   private app: express.Application;
@@ -10,6 +11,7 @@ class Server {
     this.app = express();
     // App init
     this.configuration();
+    this.app.use(cors());
     this.app.use(express.json());
 
     this.routes();
