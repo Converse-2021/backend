@@ -6,6 +6,7 @@ import {
 import { EventsService } from "../services";
 import { PostgresErrorCode, isQueryFailedError } from "../util/psqlErrors";
 import { QueryFailedError } from "typeorm";
+import { ImageIT } from "../database/entities/events.entity";
 // type AllEntity = ImageIT | PyIT | CodeDecode | ITQuiz | LogoHunt | WYSIWYG;
 
 export class EventController {
@@ -30,7 +31,7 @@ export class EventController {
 
   public register = async (req: Request, res: Response) => {
     const eventName: string = req.params.eventName;
-    const event: Event | EventWithMultipleParticipants = req.body;
+    const event: Event | EventWithMultipleParticipants | ImageIT = req.body;
     console.log(
       "🚀 ~ file: index.ts ~ line 33 ~ EventController ~ register= ~ req.body",
       event

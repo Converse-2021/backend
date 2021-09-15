@@ -32,24 +32,24 @@ export abstract class EventWithMultipleParticipants extends Event {
   @PrimaryGeneratedColumn()
   id2: number;
 
-  @Column()
+  @Column({ nullable: true })
   enrollment2: string;
 
-  @Column()
+  @Column({ nullable: true })
   firstName2: string;
 
-  @Column()
+  @Column({ nullable: true })
   lastName2: string;
 
-  @Column()
+  @Column({ nullable: true })
   email2: string;
 
-  @Column()
+  @Column({ nullable: true })
   phoneNumber2: string;
 
-  @Column()
+  @Column({ nullable: true })
   department2: string;
 
-  @Column()
+  @Column({ nullable: true })
   year2: number;
 }

@@ -11,6 +11,7 @@ import {
   Event,
   EventWithMultipleParticipants
 } from "../database/entities/event.abstract";
+import { ImageIT } from "../database/entities/events.entity";
 
 import Server from "../server";
 
@@ -62,7 +63,7 @@ export class EventsService {
 
   public create = async (
     eventName: string,
-    event: Event | EventWithMultipleParticipants
+    event: Event | EventWithMultipleParticipants | ImageIT
   ) => {
     // this.connection.createQueryBuilder().insert().into(this.imageITRepo.target);
 
