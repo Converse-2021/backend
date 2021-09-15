@@ -35,7 +35,7 @@ class Server {
         // database: "converse",
 
         entities: [__dirname + "/../**/*.entity.{js,ts}"],
-        synchronize: process.env.DATABASE_URL ? false : true,
+        synchronize: process.env.DATABASE_URL ? true : true,
         name: "converse"
       };
 
