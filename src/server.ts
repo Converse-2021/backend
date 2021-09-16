@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import { EventController } from "./controllers";
 import { ConnectionOptions, createConnection } from "typeorm";
 import cors from "cors";
+import tokenChecker from "./middlewares/tokenChecker";
+import dotenv from "dotenv";
 
 class Server {
   private app: express.Application;
@@ -13,7 +15,8 @@ class Server {
     this.configuration();
     this.app.use(cors());
     this.app.use(express.json());
-
+    dotenv.config();
+    this.app.use(tokenChecker);
     this.routes();
   }
 
@@ -35,7 +38,7 @@ class Server {
         // database: "converse",
 
         entities: [__dirname + "/../**/*.entity.{js,ts}"],
-        synchronize: process.env.DATABASE_URL ? true : true,
+        synchronize: process.env.DATABASE_URL ? false : true,
         name: "converse"
       };
 
@@ -62,10 +65,10 @@ class Server {
 
       let connection = await createConnection(connectionOptions);
 
-      console.log(
-        "🚀 ~ file: server.ts ~ line 33 ~ Server ~ routes ~ connection",
-        connection
-      );
+      // console.log(
+      //   "🚀 ~ file: server.ts ~ line 33 ~ Server ~ routes ~ connection",
+      //   connection
+      // );
     } catch (error) {
       console.log(error);
     }
